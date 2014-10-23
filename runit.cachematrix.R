@@ -20,6 +20,7 @@ checkException(cacheSolve(cache))
 
 # function that captures caching message
 makeMessageCaptor <- function() {
+  msg <- NULL
   setMessage <- function(message) { msg <<- message }
   getMessage <- function() { msg }
   list(setMessage = setMessage, getMessage = getMessage)
@@ -30,5 +31,11 @@ makeMessageCaptor <- function() {
 messageCaptor <- makeMessageCaptor()
 soluble <- matrix(1)
 cache <- makeCacheMatrix(soluble)
+
+# 1st time - expect no message to have been logged
+cacheSolve(cache, display=messageCaptor$setMessage)
+checkEquals(messageCaptor$getMessage(), NULL)
+
+# 2nd time - expect caching message to have been logged
 cacheSolve(cache, display=messageCaptor$setMessage)
 checkEquals(messageCaptor$getMessage(), "getting cached data")

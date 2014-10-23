@@ -1,6 +1,7 @@
 ## Functions for memoized calculation of matrix inverse
 
-## 
+## Creates a vector of functions that can operate 
+## on a matrix stored as variable x
 makeCacheMatrix <- function(x = matrix()) {
     inverse <- NULL
     setMatrix <- function(y) {
